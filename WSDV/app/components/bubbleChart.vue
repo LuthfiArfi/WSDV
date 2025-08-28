@@ -1,6 +1,6 @@
 <template>
   <div class="w-full" :class="wrapperClass" :style="wrapperStyle">
-    <h2 v-if="title" class="text-lg font-bold mb-2">{{ title }}</h2>
+    <h2 v-if="title" class="text-lg font-bold mb-2 text-center">{{ title }}</h2>
     <canvas
       ref="canvas"
       :class="canvasClass"
@@ -13,24 +13,23 @@
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import {
   Chart,
-  BarController,
-  BarElement,
-  CategoryScale,
+  BubbleController,
+  PointElement,
   LinearScale,
   Tooltip,
   Legend
 } from 'chart.js'
 
-// Register chart.js modules
-Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend)
+// ✅ Register module yang diperlukan untuk Bubble chart
+Chart.register(BubbleController, PointElement, LinearScale, Tooltip, Legend)
 
 const props = defineProps({
-  title: { type: String, default: 'Bar Chart' },
+  title: { type: String, default: 'Bubble Chart' },
   modelValue: { type: Object, required: true },
   canvasClass: { type: String, default: '' },
   canvasStyle: { type: [String, Object], default: '' },
-  wrapperClass: { type: String, default: '' }, // Optional: atur wrapper <div>
-  wrapperStyle: { type: [String, Object], default: '' } // Optional
+  wrapperClass: { type: String, default: '' },
+  wrapperStyle: { type: [String, Object], default: '' }
 })
 
 const canvas = ref(null)
@@ -41,25 +40,30 @@ const renderChart = () => {
 
   const { labels = [], datasets = [] } = props.modelValue || {}
 
-  if (!Array.isArray(labels) || !Array.isArray(datasets)) return
+  if (!Array.isArray(datasets)) return
 
   if (chartInstance) {
     chartInstance.destroy()
   }
 
   chartInstance = new Chart(canvas.value, {
-    type: 'bar',
+    type: 'bubble',
     data: { labels, datasets },
     options: {
       responsive: true,
-      maintainAspectRatio: false, // ❗ penting untuk custom height/width
+      maintainAspectRatio: false,
       plugins: {
-        legend: { display: true },
+        legend: { position: 'top' },
         tooltip: { enabled: true }
       },
       scales: {
+        x: {
+          beginAtZero: true,
+          title: { display: true, text: 'X Axis' }
+        },
         y: {
-          beginAtZero: true
+          beginAtZero: true,
+          title: { display: true, text: 'Y Axis' }
         }
       }
     }
@@ -75,6 +79,6 @@ watch(() => props.modelValue, renderChart, { deep: true })
 
 <style scoped>
 .chart-canvas {
-  height: 256px; /* fallback tinggi default */
+  height: 256px;
 }
 </style>

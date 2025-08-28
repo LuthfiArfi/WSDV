@@ -1,8 +1,9 @@
 <template>
     <div>
         This is main layout
-        <FormAuth />
+        <FormServiceid />
         <FormBiogasreport />
+
     </div>
 </template>
 

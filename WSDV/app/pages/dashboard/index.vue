@@ -1,32 +1,47 @@
 <template>
-  <div class="p-8 bg-gray-100 min-h-screen">
-    <BarChart
-      title="Grafik Penjualan"
-      v-model="chartData"
-    />
-    <button
-      class="mt-6 px-4 py-2 bg-blue-600 text-white rounded"
-      @click="updateData"
-    >
-      Update Data
-    </button>
+  <div class="flex flex-row flex-wrap justify-center w-full p-4 h-[100vh]">
+    <client-only>
+      <div :class="chartWrapperClass" v-for="i in 4" :key="i">
+        <BarChart
+          :modelValue="chartData"
+          title="Sales Chart"
+          wrapperClass="w-full h-full"
+        />
+      </div>
+      <div :class="chartWrapperClass">
+        <LineChart
+          :modelValue="chartData"
+          title="Sales Chart"
+          wrapperClass="w-full h-full"
+        />
+      </div>
+      <div :class="chartWrapperClass">
+        <PieChart
+          :modelValue="chartData"
+          title="Sales Chart"
+          wrapperClass="w-full h-full"
+        />
+      </div>
+    </client-only>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+const chartWrapperClass = 'flex-1 md:flex justify-center h-64 p-2 m-3 mb-5'
 
-
-const chartData = ref({
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
-  dataset: {
-    label: 'Sales',
-    data: [120, 190, 300, 250, 220, 270]
-  }
-})
-
-const updateData = () => {
-  chartData.value.labels.push('Jul')
-  chartData.value.dataset.data.push(310)
+const chartData = {
+  labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+  datasets: [
+    {
+      label: 'Revenue',
+      data: [150, 200, 180, 220],
+      backgroundColor: '#3b82f6'
+    },
+    {
+      label: 'Gross Profit',
+      data: [200, 150, 110, 250],
+      backgroundColor: '#3da916'
+    }
+  ]
 }
 </script>

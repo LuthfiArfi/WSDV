@@ -1,1 +1,29 @@
 @import "tailwindcss";
+
+
+/* Scrollbar tipis dan minimalis */
+.scrollbar-thin {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgba(100, 100, 100, 0.5) transparent; /* warna thumb dan track Firefox */
+  }
+  
+  /* Webkit browsers (Chrome, Safari, Edge Chromium) */
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 2px; /* untuk horizontal scrollbar */
+    width: 6px; /* untuk vertical scrollbar */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.5);
+    border-radius: 3px;
+    border: 1px solid transparent; /* beri border biar thumb tidak terlalu "padat" */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(100, 100, 100, 0.7);
+  }
+  
