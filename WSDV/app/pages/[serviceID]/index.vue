@@ -1,6 +1,6 @@
 <template>
     <div>
-        this is report template {{id}}
+        <h1>This is service ID page : {{ serviceID }}</h1>
     </div>
 </template>
 
@@ -8,5 +8,5 @@
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const id = route.params.id
+const id = route.params.serviceID
 </script>

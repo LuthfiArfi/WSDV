@@ -33,7 +33,6 @@
                 <InputDate label="Tanggal Akhir" class="w-full" />
               </div>
               <InputRepeater label="Attendees" v-model="attendees" />
-              <div>{{ attendees }}</div>
             </div>
           </TabPanel>
           
@@ -85,9 +84,7 @@
     'General',
     'Man Power',
     'Spare Part',
-    'Dryer/Chiller',
-    'Gas Blower',
-    'Gas Engine',
+    
   ]
   
   const attendees = ref([])
