@@ -23,6 +23,9 @@
         />
       </div>
     </client-only>
+    <InputText v-model="chartData.datasets[0].data[1]"/>
+     {{ chartData }}
+     {{ chartData.datasets[0].data[1] }}
   </div>
 </template>
 
@@ -35,7 +38,7 @@ const chartData = {
     {
       label: 'Revenue',
       data: [150, 200, 180, 220],
-      backgroundColor: '#3b82f6'
+      backgroundColor: '#3b1246'
     },
     {
       label: 'Gross Profit',
@@ -44,4 +47,5 @@ const chartData = {
     }
   ]
 }
+
 </script>
